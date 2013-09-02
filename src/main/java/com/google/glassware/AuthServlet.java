@@ -15,17 +15,17 @@
  */
 package com.google.glassware;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.TokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.GenericUrl;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
+import com.google.api.client.auth.oauth2.TokenResponse;
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.http.GenericUrl;
 
 /**
  * This servlet manages the OAuth 2.0 dance
@@ -64,10 +64,15 @@ public class AuthServlet extends HttpServlet {
       flow.createAndStoreCredential(tokenResponse, userId);
 
       // The dance is done. Do our bootstrapping stuff for this user
-      NewUserBootstrapper.bootstrapNewUser(req, userId);
-
-      // Redirect back to index
-      res.sendRedirect(WebUtil.buildUrl(req, "/"));
+      try{
+          
+          NewUserBootstrapper.bootstrapNewUser(req, userId);
+          res.sendRedirect(WebUtil.buildUrl(req, "/"));
+      }catch (IllegalArgumentException e){
+          LOG.warning(e.getMessage());  
+          res.sendRedirect(WebUtil.buildUrl(req, "/"));
+      }
+      
       return;
     }
 
