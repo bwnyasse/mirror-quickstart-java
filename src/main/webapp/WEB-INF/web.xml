@@ -77,6 +77,16 @@ limitations under the License.
     <url-pattern>/attachmentproxy</url-pattern>
   </servlet-mapping>
 
+   <!-- Support for attachement  -->
+   <servlet>
+    <servlet-name>DownloadAttachementsServlet</servlet-name>
+    <servlet-class>com.google.api.services.mirror.utils.DownloadAttachementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadAttachementsServlet</servlet-name>
+    <url-pattern>/attachements/*</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

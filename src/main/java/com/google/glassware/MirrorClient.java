@@ -15,13 +15,15 @@
  */
 package com.google.glassware;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Logger;
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.mirror.Mirror;
 import com.google.api.services.mirror.model.Attachment;
 import com.google.api.services.mirror.model.Contact;
@@ -30,11 +32,8 @@ import com.google.api.services.mirror.model.Subscription;
 import com.google.api.services.mirror.model.SubscriptionsListResponse;
 import com.google.api.services.mirror.model.TimelineItem;
 import com.google.api.services.mirror.model.TimelineListResponse;
+import com.google.api.services.mirror.utils.EmulatorUtil;
 import com.google.common.io.ByteStreams;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Logger;
 
 /**
  * A facade for easier access to basic API operations
@@ -45,8 +44,7 @@ public class MirrorClient {
   private static final Logger LOG = Logger.getLogger(MirrorClient.class.getSimpleName());
 
   public static Mirror getMirror(Credential credential) {
-    return new Mirror.Builder(new NetHttpTransport(), new JacksonFactory(), credential)
-        .setApplicationName("PG Java Starter").build();
+      return EmulatorUtil.getMirror(credential, "PG Java Starter", GlassUtil.getAppEngineApplicationUrl());
   }
 
   public static Contact insertContact(Credential credential, Contact contact) throws IOException {

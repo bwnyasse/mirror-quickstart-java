@@ -15,12 +15,6 @@
  */
 package com.google.glassware;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.http.javanet.NetHttpTransport;
-
-import com.google.api.client.json.jackson2.JacksonFactory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
@@ -29,6 +23,12 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
 
 /**
  * A collection of utility functions that simplify common authentication and
@@ -39,8 +39,9 @@ import javax.servlet.http.HttpSession;
 public class AuthUtil {
   public static ListableMemoryCredentialStore store = new ListableMemoryCredentialStore();
   public static final String GLASS_SCOPE = "https://www.googleapis.com/auth/glass.timeline "
-      + "https://www.googleapis.com/auth/glass.location "
-      + "https://www.googleapis.com/auth/userinfo.profile";
+          + "https://www.googleapis.com/auth/glass.location "
+          + "https://www.googleapis.com/auth/userinfo.profile "
+          + "https://www.googleapis.com/auth/userinfo.email";
 
   /**
    * Creates and returns a new {@link AuthorizationCodeFlow} for this app.
