@@ -25,11 +25,12 @@ limitations under the License.
   </properties>
 
   <dependencies>
+  
     <!-- Java Google API Client Library -->
     <dependency>
       <groupId>com.google.apis</groupId>
-      <artifactId>google-api-services-mirror</artifactId>
-      <version>v1-rev20-1.16.0-rc</version>
+      <artifactId>google-api-services-mirror-emulated</artifactId>
+      <version>v1-emulated</version>
     </dependency>
     <dependency>
       <groupId>com.google.http-client</groupId>
